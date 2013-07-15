@@ -1,0 +1,75 @@
+<html>
+<head>
+	<link rel="stylesheet" href="externals/leaflet.css" />
+	<script src="externals/leaflet.js"></script>
+	<!--JQuery for Minimize things-->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js">
+	<script src="externals/jquery.js"></script>
+	<style type="text/css">
+		#map { height: 100%;
+				width: 100% }
+	</style>
+	<style> 
+	.shadow
+	{
+	width:300px;
+	height:500px;
+	background-color:#F2F2F2;
+	box-shadow: 10px 10px 5px #888888;
+	}
+</style>
+	
+</head>
+
+
+<body>
+	<div id="map" style="position:relative; z-index:3;">
+	<div id ="PopUpSearch" style="position:absolute; bottom:60px;width:410px;border:1px solid #CCC; z-index:4" class="shadow">
+		<div style = "float:right;"> <a id = "toggleAll" onclick="Minimize()" href="#"> <img class="toggleArrow" title = "Minimize" src = "minimize2.png"/> </a> </div>
+		<div style ="float:left; margin-right:10px;">
+			<img src = "Taalash.png">
+		</div>
+		<div style ="padding:5px;">
+			<span style="color: #284a6e; font-weight:bold; font-size:16pt;"> Taalash </span>
+			<br>
+			<span style="color:#284a6e;font-size:9pt;">
+				"Your search ends here"
+			</span>
+		</div>
+		</div>	
+	</div>
+	<script>
+	function Minimize() 
+	{
+	elem = document.getElementById('PopUpSearch');
+	elem.style.display = 'none';
+	}
+
+</script>
+	<script>
+		$(function(){
+			var map = L.map('map').setView([37.775196, -122.419204], 13);
+			L.tileLayer('http://{s}.tile.cloudmade.com/96fa52df8d57472cb31113cc430d8d30/997/256/{z}/{x}/{y}.png', 
+				{
+			    maxZoom: 18
+			}).addTo(map);
+			var marker = L.marker([51.5, -0.09]).addTo(map);
+			var popup=L.popup();
+			function onMapClick(e) {
+
+			}
+			function onZoomEnd(e){
+				//popup.setLatLng(e.latlng).setContent('on zoom event info:'+(e.toString())).openOn(map);
+				console.log(map.getBounds());
+				
+			}
+
+			
+			map.on('click',onMapClick);
+			map.on('zoomend',onZoomEnd);
+
+		});
+	</script>
+</body>
+
+</html>
