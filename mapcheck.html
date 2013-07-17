@@ -25,9 +25,10 @@
 <body>
 	<div id="map" style="position:relative; z-index:3;">
 	<div id ="PopUpSearch" style="position:absolute; bottom:60px;width:410px;border:1px solid #CCC; z-index:4" class="shadow">
-		<div style = "float:right;"> <a id = "toggleAll" onclick="Minimize()" href="#"> <img class="toggleArrow" title = "Minimize" src = "minimize2.png"/> </a> </div>
+		<!--<div style = "float:right;"> <a id = "toggleAll" onclick="Minimize()" href="#"> <img title = "Minimize" src = "minimize2.png"/> </a> </div> -->
+		<div style = "float:right;"> <a onclick="Minimize()" href="#"><img id="MaxMin" title ="Minimize" src="img/minimize2.png"/></a> </div> 
 		<div style ="float:left; margin-right:10px;">
-			<img src = "Taalash.png">
+			<img src = "img/Taalash.png">
 		</div>
 		<div style ="padding:5px;">
 			<span style="color: #284a6e; font-weight:bold; font-size:16pt;"> Taalash </span>
@@ -41,8 +42,11 @@
 	<script>
 	function Minimize() 
 	{
-	elem = document.getElementById('PopUpSearch');
-	elem.style.display = 'none';
+		elem = document.getElementById('PopUpSearch');
+		elem.style.height = '50px';
+        elem1 = document.getElementById('MaxMin');
+        elem1.src = 'img/maximize2.png';
+       
 	}
 
 </script>
