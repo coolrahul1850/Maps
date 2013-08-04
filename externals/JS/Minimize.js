@@ -19,6 +19,10 @@ function Minimize()
         	Minimize.counter = 0;
        	elem.style.height = '500px';
        		elem1.title = 'Minimize';
-      		elem1.src = 'img/minimize2.png';
+      		elem1.src = 'externals/img/minimize2.png';
           }
 	}
+
+function Pop(){
+  window.alert("hi");
+}
