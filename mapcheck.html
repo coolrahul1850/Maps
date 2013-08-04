@@ -1,71 +1,36 @@
 <html>
 <head>
-	<link rel="stylesheet" href="externals/leaflet.css" />
-	<script src="externals/leaflet.js"></script>
-	<!--JQuery for Minimize things-->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js">
-	<script src="externals/jquery.js"></script>
+	<link rel="stylesheet" href="externals/CSS/leaflet.css" />
+	<link rel="stylesheet" href="externals/CSS/map.css" />
+	<script src="externals/JS/leaflet.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script src="externals/JS/jquery.js"></script>
+	<script src="externals/JS/Minimize.js"></script>
 	<style type="text/css">
 		#map { height: 100%;
 				width: 100% }
 	</style>
-	<style> 
-	.shadow
-	{
-	width:300px;
-	height:500px;
-	background-color:#F2F2F2;
-	box-shadow: 10px 10px 5px #888888;
-	}
-</style>
-	
 </head>
 
 
 <body>
 	<div id="map" style="position:relative; z-index:3;">
-	<div id ="PopUpSearch" style="position:absolute; bottom:60px;width:410px;border:1px solid #CCC; z-index:4" class="shadow">
-	<div style = "float:right;"> <img id="MaxMin" onclick="Minimize()" title ="Minimize" src="img/minimize2.png" href="#"/></div>
-		<div style ="float:left; margin-right:10px;">
-			<img src = "img/Taalash.png">
-		</div>
-		<div style ="padding:5px;">
-			<span style="color: #284a6e; font-weight:bold; font-size:16pt;"> Taalash </span>
-			<br>
-			<span style="color:#284a6e;font-size:9pt;">
+		<div id ="PopUpSearch" style="position:absolute; bottom:60px;width:410px;border:1px solid #CCC; z-index:4" class="shadow">
+		<div style = "float:right;"> <img id="MaxMin" onclick="Minimize()" title ="Minimize" src="externals/img/minimize2.png" href="#"/></div>
+			<div style ="float:left; margin-right:10px;">
+				<img src = "externals/img/Taalash.png">
+			</div>
+			<div style ="padding:5px;">
+				<span style="color: #284a6e; font-weight:bold; font-size:16pt;"> Taalash </span>
+				<br>
+				<span style="color:#284a6e;font-size:9pt;">
 				"Your search ends here"
-			</span>
-		</div>
+				</span>
+			</div>
 		</div>	
 	</div>
-	<script>
-	function Minimize() 
-	{
-	
-		if ( typeof Minimize.counter == 'undefined' )
-		{
-        	Minimize.counter = 0; 
-        }
-        elem = document.getElementById('PopUpSearch');
-        elem1 = document.getElementById('MaxMin');
-        if (Minimize.counter == 0)
-        {
-        	elem.style.height = '50px';
-       		elem1.title = 'Maximize';
-       		elem1.src = 'img/maximize2.png';
-          	Minimize.counter = 1;
-          } 
-        else if (Minimize.counter == 1)
-        {
-        	Minimize.counter = 0;
-       	elem.style.height = '500px';
-       		elem1.title = 'Minimize';
-      		elem1.src = 'img/minimize2.png';
-          }
-	}
 
-</script>
-	<script>
+<script>
 		$(function(){
 			var map = L.map('map').setView([37.775196, -122.419204], 13);
 			L.tileLayer('http://{s}.tile.cloudmade.com/96fa52df8d57472cb31113cc430d8d30/997/256/{z}/{x}/{y}.png', 
@@ -90,7 +55,7 @@
 			//creating icon 
 			var LeafIcon = L.Icon.extend({
 				options: {
-				shadowUrl: 'img/leaf-shadow.png',
+				shadowUrl: 'externals/img/leaf-shadow.png',
 				iconSize:     [38, 95],
 				shadowSize:   [50, 64],
 				iconAnchor:   [22, 94],
@@ -99,7 +64,7 @@
 			}
 		});
 
-		var greenIcon = new LeafIcon({iconUrl: 'img/leaf-green.png'});
+		var greenIcon = new LeafIcon({iconUrl: 'externals/img/leaf-green.png'});
 //			redIcon = new LeafIcon({iconUrl: '../docs/images/leaf-red.png'}),
 //			orangeIcon = new LeafIcon({iconUrl: '../docs/images/leaf-orange.png'});
 
