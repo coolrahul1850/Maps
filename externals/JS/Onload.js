@@ -37,7 +37,28 @@ function Onload()
 //			orangeIcon = new LeafIcon({iconUrl: '../docs/images/leaf-orange.png'});
 
 		L.marker([37.775196, -122.419204], {icon: greenIcon}).bindPopup("I am a green leaf.").addTo(map);
+	
 //		L.marker([51.495, -0.083], {icon: redIcon}).bindPopup("I am a red leaf.").addTo(map);
 //		L.marker([51.49, -0.1], {icon: orangeIcon}).bindPopup("I am an orange leaf.").addTo(map);
+
+	
+	// Load the data from all the listings
+
+		$.getJSON("http://findall.aws.af.cm/listings",function(result){
+				$.each(result,function(i,field)
+				{
+					var temp = String(field.loc);
+					var temp1 = temp.split(",");
+					//console.log(temp1[1]);
+					L.marker([temp1[1], temp1[0]], {icon: greenIcon}).bindPopup("I am a green leaf.").addTo(map);
+				});
+		});
+
+
+
+
+
+		
+
 
 }
