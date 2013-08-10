@@ -50,7 +50,8 @@ function Onload()
 					var temp = String(field.loc);
 					var temp1 = temp.split(",");
 					//console.log(temp1[1]);
-					L.marker([temp1[1], temp1[0]], {icon: greenIcon}).bindPopup("I am a green leaf.").addTo(map);
+					console.log(field.title + field.price);
+					L.marker([temp1[1], temp1[0]], {icon: greenIcon}).bindPopup(field.title + " cost is" + field.price).addTo(map);
 				});
 		});
 
