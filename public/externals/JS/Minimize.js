@@ -23,6 +23,3 @@ function Minimize()
           }
 	}
 
-function Pop(){
-  window.alert("hi");
-}

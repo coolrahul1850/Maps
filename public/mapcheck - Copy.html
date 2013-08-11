@@ -1,0 +1,70 @@
+<html>
+<head>
+	<link rel="stylesheet" href="externals/CSS/leaflet.css" />
+	<link rel="stylesheet" href="externals/CSS/map.css" />
+	 <script src="externals/JS/leaflet.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script src="externals/JS/jquery.js"></script>
+	<script src="externals/JS/Minimize.js"></script>
+	<script src="externals/JS/Onload.js"></script>
+	<style type="text/css">
+		#map { height: 100%;
+				width: 100% }
+	</style>
+
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <script>
+  $(function() {
+    $( "#slider-range" ).slider({
+      range: true,
+      min: 0,
+      max: 500,
+      values: [ 75, 300 ],
+      slide: function( event, ui ) {
+        $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+      }
+    });
+    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+      " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+
+    
+  });
+  </script>
+
+</head>
+
+
+<body>
+	<div id="map" style="position:relative; z-index:3;">
+		<div id ="PopUpSearch" style="position:absolute; bottom:60px;width:410px;border:1px solid #CCC; z-index:4" class="shadow">
+		<div style = "float:right;"> <img id="MaxMin" onclick="Minimize()" title ="Minimize" src="externals/img/minimize2.png" href="#"/></div>
+			<div style ="float:left; margin-right:10px;">
+				<img src = "externals/img/Taalash.png">
+			</div>
+			<div style ="padding:5px;">
+				<span style="color: #284a6e; font-weight:bold; font-size:16pt;"> Taalash </span>
+				<br>
+				<span style="color:#284a6e;font-size:9pt;">
+				"Your search ends here"
+				</span>
+
+			</div>
+			<div id="slider-range"></div>
+			<p>
+  <label for="amount">Price range:</label>
+  <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" />
+			</p>
+			</div>	
+	</div>
+
+
+<script>
+window.onload=Onload;
+</script>
+
+
+
+</body>
+</html>
