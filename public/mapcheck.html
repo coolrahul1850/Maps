@@ -1,0 +1,40 @@
+<html>
+<head>
+	<link rel="stylesheet" href="externals/CSS/leaflet.css" />
+	<link rel="stylesheet" href="externals/CSS/map.css" />
+	<script src="externals/JS/leaflet.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script src="externals/JS/jquery.js"></script>
+	<script src="externals/JS/Minimize.js"></script>
+	<script src="externals/JS/Onload.js"></script>
+	<style type="text/css">
+		#map { height: 100%;
+				width: 100% }
+	</style>
+</head>
+
+
+<body>
+	<div id="map" style="position:relative; z-index:3;">
+		<div id ="PopUpSearch" style="position:absolute; bottom:60px;width:410px;border:1px solid #CCC; z-index:4" class="shadow">
+		<div style = "float:right;"> <img id="MaxMin" onclick="Minimize()" title ="Minimize" src="externals/img/minimize2.png" href="#"/></div>
+			<div style ="float:left; margin-right:10px;">
+				<img src = "externals/img/taalash.png">
+			</div>
+			<div style ="padding:5px;">
+				<span style="color: #284a6e; font-weight:bold; font-size:16pt;"> Taalash </span>
+				<br>
+				<span style="color:#284a6e;font-size:9pt;">
+				"Your search ends here"
+				</span>
+			</div>
+		</div>	
+	</div>
+
+
+<script>
+window.onload=Onload;
+</script>
+
+</body>
+</html>
