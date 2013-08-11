@@ -1,0 +1,12 @@
+{
+    "name":"findall",
+    "version":"0.0.1",
+    "dependencies":{
+        "express":"latest",
+        "async":"latest",
+        "mongoose" : "latest",
+        "underscore" : "latest",
+        "jade" : "*",
+        "mongodb": "latest"
+    }
+}
