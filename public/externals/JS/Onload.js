@@ -16,11 +16,9 @@ function Onload()
 		$.getJSON("http://findall.aws.af.cm/listings",function(result){
 				$.each(result,function(i,field)
 				{
-					var temp = String(field.loc);
-					var temp1 = temp.split(",");
 					//console.log(temp1[1]);
 	//				console.log(field.title + field.price);
-					var marker = new google.maps.Marker({position: new google.maps.LatLng(temp1[1], temp1[0]),map: map,title: 'Click me'});
+					var marker = new google.maps.Marker({position: new google.maps.LatLng(field.l.loc[1], field.l.loc[0]),map: map,title: 'Click me'});
 					var infowindow = new google.maps.InfoWindow({content: field.title + " cost is" + field.price});
 					google.maps.event.addListener(marker, 'click', function() {	infowindow.open(map, marker);});
 				});

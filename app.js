@@ -40,6 +40,7 @@ var generate_mongo_url = function(obj){
     }
 }
 var mongourl = generate_mongo_url(mongo);
+
 process.env.mongourl = mongourl;
 mongoose.connect(mongourl);
 
@@ -55,5 +56,8 @@ app.get('/',function(req,res){
 
 app.get('/listings', listings.listings);
 app.get('/addListings', listings.addListings);
+app.get('/listings/delete', listings.deleteAllListings);
+app.post('/listings/upload', listings.uploadListings);
+
 
 app.listen(process.env.VCAP_APP_PORT || 3000);

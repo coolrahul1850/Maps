@@ -10,7 +10,10 @@ var ListingSchema = new Schema({
 		price : Number,
 		bedrooms : String,
 		currency : String,
-		loc : Array
+		l : {
+			type: {type:String},
+			loc: []
+		}
 });
 
 ListingSchema.index({loc:'2d'});
