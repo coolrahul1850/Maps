@@ -3,8 +3,7 @@ var map;
 
 function getListings() {
 	console.log(map.getBounds().toString());
-	var url = "http://findall.aws.af.cm/listings";
-	$.getJSON("listings/?box="+map.getBounds().toUrlValue(),function(result){
+	$.getJSON("http://findall.aws.af.cm/listings/?box="+map.getBounds().toUrlValue(),function(result){
 		$.each(result,function(i,field)
 		{
 			var marker = new google.maps.Marker({position: new google.maps.LatLng(field.l.coordinates[1], field.l.coordinates[0]),map: map,title: 'Click me'});
