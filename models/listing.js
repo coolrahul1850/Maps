@@ -10,10 +10,13 @@ var ListingSchema = new Schema({
 		price : Number,
 		bedrooms : String,
 		currency : String,
-		loc : Array
+		l : {
+			type: {type:String},
+			coordinates: []
+		}
 });
 
-ListingSchema.index({loc:'2d'});
+//ListingSchema.index({loc:'2d'});
 
 var Listing = mongoose.model('Listing', ListingSchema);
 
