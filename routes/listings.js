@@ -11,7 +11,8 @@ exports.listings = function(req,res) {
 	if(req.query.box && (box=req.query.box.split(',',4)).length==4) {
 		var rect=[[parseFloat(box[1]), parseFloat(box[0])],[parseFloat(box[3]),parseFloat(box[2])]];
 		console.log(rect);
-		Listing.find({l:{$geoWithin:{$box:rect}}},function(err,listings){
+		//Listing.find({l:{$geoWithin:{$box:rect}}},function(err,listings){
+		Listing.find(function(err,listings){
 			console.log(err);
 			res.send(listings);
 		});
