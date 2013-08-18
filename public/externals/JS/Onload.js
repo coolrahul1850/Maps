@@ -2,16 +2,46 @@
 var map;
 
 function getListings() {
+
+	var marker = new Array();
+	var infowindow = new Array();
+	var field = new Array();		
+
 	console.log(map.getBounds().toString());
 	$.getJSON("http://findall.aws.af.cm/listings/?box="+map.getBounds().toUrlValue(),function(result){
-		$.each(result,function(i,field)
+		$.each(result,function(i,temp)
 		{
-			var marker = new google.maps.Marker({position: new google.maps.LatLng(field.l.coordinates[1], field.l.coordinates[0]),map: map,title: 'Click me'});
-			var infowindow = new google.maps.InfoWindow({content: field.title + " cost is" + field.price});
-			google.maps.event.addListener(marker, 'click', function() {	infowindow.open(map, marker);});
+			field[i] = temp;
+			marker[i] = new google.maps.Marker({position: new google.maps.LatLng(field[i].l.coordinates[1], field[i].l.coordinates[0]),map: map,title: 'Click me'});
+			infowindow[i] = new google.maps.InfoWindow({content: field[i].title + " cost is" + field[i].price});
+			google.maps.event.addListener(marker[i], 'click', function() {	infowindow[i].open(map, marker[i]);});
 		});
 	});
+
+
+//Slider functionality 
+$(function() {
+    $( "#slider-range" ).slider({range: true,min: 0,max: 15000,values: [ 0, 15000 ],slide: function( event, ui ) 
+    	{
+        	$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+        	for (var i = 0; i < marker.length; i++ ) 
+        	{
+
+				if (field[i].price >= ui.values[0] && field[i].price <= ui.values[1])
+					marker[i].setMap(map);
+				else
+					marker[i].setMap(null);        		
+  	 		}
+      	}
+
+    	});
+    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+      " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+ 			 });
+
 }
+
+
 
 function Onload()
 {
@@ -24,5 +54,6 @@ function Onload()
 
 	map = new google.maps.Map(document.getElementById('map'), options);
 	google.maps.event.addListener(map, 'idle', getListings);
+
 }
 
