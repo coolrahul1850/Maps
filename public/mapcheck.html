@@ -6,14 +6,13 @@
 	<script src="externals/JS/jquery.js"></script>
 	<script src="externals/JS/Onload.js"></script>
 	<script src="externals/JS/Minimize.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 </head>
-
 
 <body>
 
-		<div id="map" style="position:relative; z-index:3;">
-	</div>
-
+	<div id="map" style="position:relative; z-index:3;"></div>
 	<div id ="PopUpSearch" style="position:absolute; bottom:60px;width:410px;border:1px solid #CCC; z-index:4" class="shadow">
 		<div style = "float:right;"> <img id="MaxMin" onclick="Minimize()" title ="Minimize" src="externals/img/minimize2.png" href="#"/></div>
 			<div style ="float:left; margin-right:10px;">
@@ -26,8 +25,10 @@
 				"Your search ends here"
 				</span>
 			</div>
-		</div>
-
+				<label for="amount">Price range:</label>
+				<input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" />
+				<div id = "slider-range"></div>
+	</div>
 
 <script>
 window.onload=Onload;
