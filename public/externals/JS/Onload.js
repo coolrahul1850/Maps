@@ -1,3 +1,19 @@
+
+var map;
+
+function getListings() {
+	console.log(map.getBounds().toString());
+	var url = "http://findall.aws.af.cm/listings";
+	$.getJSON("listings/?box="+map.getBounds().toUrlValue(),function(result){
+		$.each(result,function(i,field)
+		{
+			var marker = new google.maps.Marker({position: new google.maps.LatLng(field.l.coordinates[1], field.l.coordinates[0]),map: map,title: 'Click me'});
+			var infowindow = new google.maps.InfoWindow({content: field.title + " cost is" + field.price});
+			google.maps.event.addListener(marker, 'click', function() {	infowindow.open(map, marker);});
+		});
+	});
+}
+
 function Onload()
 {
 	
@@ -7,21 +23,7 @@ function Onload()
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 		};
 
-	var map = new google.maps.Map(document.getElementById('map'), options);
-	
-
-
-	// Load the data from all the listings
-
-		$.getJSON("http://findall.aws.af.cm/listings",function(result){
-				$.each(result,function(i,field)
-				{
-					//console.log(temp1[1]);
-	//				console.log(field.title + field.price);
-					var marker = new google.maps.Marker({position: new google.maps.LatLng(field.l.loc[1], field.l.loc[0]),map: map,title: 'Click me'});
-					var infowindow = new google.maps.InfoWindow({content: field.title + " cost is" + field.price});
-					google.maps.event.addListener(marker, 'click', function() {	infowindow.open(map, marker);});
-				});
-		});
-
+	map = new google.maps.Map(document.getElementById('map'), options);
+	google.maps.event.addListener(map, 'idle', getListings);
 }
+

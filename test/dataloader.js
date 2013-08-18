@@ -16,8 +16,8 @@ function addItem(item, callback) {
 				currency : '$',
 				l:
 				{
-					type:'String',
-					loc : [parseFloat(item.longitude), parseFloat(item.latitude)]
+					type:'Point',
+					coordinates : [parseFloat(item.longitude), parseFloat(item.latitude)]
 				}
 			}).save(function(err){
 				if(!err) ++added;

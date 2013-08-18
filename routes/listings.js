@@ -7,9 +7,16 @@ exports.list = function(req, res){
 };
 
 exports.listings = function(req,res) {
-	Listing.find(function(err,listings){
-		res.send(listings);
-	});
+	var box=[];
+	if(req.query.box && (box=req.query.box.split(',',4)).length==4) {
+		var rect=[[parseFloat(box[1]), parseFloat(box[0])],[parseFloat(box[3]),parseFloat(box[2])]];
+		console.log(rect);
+		Listing.find({l:{$geoWithin:{$box:rect}}},function(err,listings){
+			console.log(err);
+			res.send(listings);
+		});
+	}
+	else res.send(400,'must limit');
 };
 
 exports.addListings = function(req,res) {
@@ -42,4 +49,11 @@ exports.uploadListings=function(req,res) {
 		}
 	} 
 	else res.send('nothing to upload');
+};
+
+exports.getAll=function(req,res){
+	Listing.find(function(err,listings){
+			console.log(err);
+			res.send(listings);
+		});
 };

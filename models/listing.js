@@ -12,11 +12,11 @@ var ListingSchema = new Schema({
 		currency : String,
 		l : {
 			type: {type:String},
-			loc: []
+			coordinates: []
 		}
 });
 
-ListingSchema.index({loc:'2d'});
+//ListingSchema.index({loc:'2d'});
 
 var Listing = mongoose.model('Listing', ListingSchema);
 
