@@ -1,11 +1,12 @@
 
 var map;
+var marker = new Array();
+var content =  new Array();
+var infowindow = new google.maps.InfoWindow();
+var field = new Array();
 
 function getListings() {
-
-	var marker = new Array();
-	var infowindow = new Array();
-	var field = new Array();		
+		
 
 	console.log(map.getBounds().toString());
 	$.getJSON("http://findall.aws.af.cm/listings/?box="+map.getBounds().toUrlValue(),function(result){
@@ -13,17 +14,17 @@ function getListings() {
 		{
 			field[i] = temp;
 			marker[i] = new google.maps.Marker({position: new google.maps.LatLng(field[i].l.coordinates[1], field[i].l.coordinates[0]),map: map,title: 'Click me'});
-			infowindow[i] = new google.maps.InfoWindow({content: field[i].title + " cost is" + field[i].price});
-			google.maps.event.addListener(marker[i], 'click', function() {	infowindow[i].open(map, marker[i]);});
+			content[i] = field[i].title + " cost is" + field[i].price;
+			google.maps.event.addListener(marker[i], 'click', function() {	infowindow.setContent(content[i]); infowindow.open(map, marker[i]);});
 		});
 	});
 
 
-//Slider functionality 
+
 $(function() {
-    $( "#slider-range" ).slider({range: true,min: 0,max: 15000,values: [ 0, 15000 ],slide: function( event, ui ) 
+    $( "#slider-range" ).slider({range: true,min: 0,max: 15000,values: [ 0,15000 ],slide: function( event, ui ) 
     	{
-        	$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+        	$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1] );
         	for (var i = 0; i < marker.length; i++ ) 
         	{
 
@@ -32,20 +33,22 @@ $(function() {
 				else
 					marker[i].setMap(null);        		
   	 		}
+  	 	
       	}
 
     	});
-    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-      " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+   $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+      " - $" + $( "#slider-range" ).slider( "values", 1 )  );
  			 });
+
+
+
 
 }
 
 
-
 function Onload()
 {
-	
 	var options = {
 		zoom: 12,
 		center: new google.maps.LatLng(37.775196, -122.419204),
