@@ -4,7 +4,7 @@ var marker = new Array();
 var content =  new Array();
 var infowindow = new google.maps.InfoWindow();
 var field = new Array();
-var min;
+
 function getListings() {
 		
 
