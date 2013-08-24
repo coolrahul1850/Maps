@@ -1,16 +1,22 @@
 
 var map;
+var previousZoom = 1000;
+var previousBoundsStr;
 
 function getListings() {
-	console.log(map.getBounds().toString());
-	$.getJSON("http://findall.aws.af.cm/listings/all/?box="+map.getBounds().toUrlValue(),function(result){
-		$.each(result,function(i,field)
-		{
-			var marker = new google.maps.Marker({position: new google.maps.LatLng(field.l.coordinates[1], field.l.coordinates[0]),map: map,title: 'Click me'});
-			var infowindow = new google.maps.InfoWindow({content: field.title + " cost is" + field.price});
-			google.maps.event.addListener(marker, 'click', function() {	infowindow.open(map, marker);});
+	if(previousZoom >= map.getZoom()) {
+		console.log(map.getBounds().toString());
+		$.getJSON("listings/poly?curr="+map.getBounds().toUrlValue()+"&prev="+previousBoundsStr+"&zoom="+map.getZoom(),function(result){
+			previousZoom = map.getZoom();
+
+			$.each(result,function(i,field)
+			{
+				var marker = new google.maps.Marker({position: new google.maps.LatLng(field.l.coordinates[1], field.l.coordinates[0]),map: map,title: 'Click me'});
+				var infowindow = new google.maps.InfoWindow({content: field.title + " cost is" + field.price});
+				google.maps.event.addListener(marker, 'click', function() {	infowindow.open(map, marker);});
+			});
 		});
-	});
+	}
 }
 
 function Onload()

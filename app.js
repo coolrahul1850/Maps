@@ -40,7 +40,7 @@ var generate_mongo_url = function(obj){
     }
 }
 var mongourl = generate_mongo_url(mongo);
-
+mongourl = "mongodb://ranger9007:poker101@ds027668.mongolab.com:27668/maps";
 process.env.mongourl = mongourl;
 mongoose.connect(mongourl);
 
@@ -59,5 +59,6 @@ app.get('/addListings', listings.addListings);
 app.get('/listings/delete', listings.deleteAllListings);
 app.post('/listings/upload', listings.uploadListings);
 app.get('/listings/all', listings.getAll);
+app.get('/listings/poly', listings.polylistings);
 
 app.listen(process.env.VCAP_APP_PORT || 3000);

@@ -16,7 +16,7 @@ var ListingSchema = new Schema({
 		}
 });
 
-//ListingSchema.index({loc:'2d'});
+//ListingSchema.index({l.coordinates:'2d'});
 
 var Listing = mongoose.model('Listing', ListingSchema);
 

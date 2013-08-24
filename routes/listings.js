@@ -6,18 +6,51 @@ exports.list = function(req, res){
   res.send("respond with a resource");
 };
 
-exports.listings = function(req,res) {
+var listingsf = function(req,res) {
 	var box=[];
-	if(req.query.box && (box=req.query.box.split(',',4)).length==4) {
+	if(req.query.curr && (box=req.query.curr.split(',',4)).length==4) {
 		var rect=[[parseFloat(box[1]), parseFloat(box[0])],[parseFloat(box[3]),parseFloat(box[2])]];
 		console.log(rect);
-		//Listing.find({l:{$geoWithin:{$box:rect}}},function(err,listings){
-		Listing.find(function(err,listings){
+		Listing.find({l:{$geoWithin:{$box:rect}}},function(err,listings){
+		//Listing.find(function(err,listings){
 			console.log(err);
 			res.send(listings);
 		});
 	}
 	else res.send(400,'must limit');
+};
+
+exports.listings = listingsf;
+
+exports.polylistings = function(req,res) {
+	if((req.query.prev || 'undefined')==='undefined') {
+		listingsf(req,res);
+		return;
+	}
+
+	console.log(JSON.stringify(req.query));
+
+	var box=req.query.curr.split(',',4);
+	//var outer=[[parseFloat(box[1]), parseFloat(box[0])],[parseFloat(box[3]),parseFloat(box[2])]];
+	var box2=req.query.prev.split(',',4);
+	//var box2= "37.658551,-122.746047,37.891657,-122.092361".split(',');
+	//var inner=[[parseFloat(box[1]), parseFloat(box[0])],[parseFloat(box[3]),parseFloat(box[2])]];
+	var poly = [ [ [parseFloat(box[1]), parseFloat(box[0])],
+				   [parseFloat(box[3]), parseFloat(box[2])],
+				   [parseFloat(box2[1]), parseFloat(box2[0])],
+				   [parseFloat(box2[3]),parseFloat(box2[2])]]];
+
+	console.log(poly);
+	Listing.find({ l :
+                  { $geoWithin :
+                    { $geometry :
+                      { type : "Polygon" ,
+                        coordinates: [[ [parseFloat(box[1]), parseFloat(box[0])], [parseFloat(box[3]), parseFloat(box[2])] ]]
+                } } } }, function(err, listings) {
+                	console.log(err? err:listings.length);
+                	res.send(listings);
+                });
+
 };
 
 exports.addListings = function(req,res) {
