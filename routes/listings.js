@@ -10,10 +10,10 @@ var listingsf = function(req,res) {
 	var box=[];
 	if(req.query.curr && (box=req.query.curr.split(',',4)).length==4) {
 		var rect=[[parseFloat(box[1]), parseFloat(box[0])],[parseFloat(box[3]),parseFloat(box[2])]];
-		console.log(rect);
 		Listing.find({l:{$geoWithin:{$box:rect}}},function(err,listings){
 		//Listing.find(function(err,listings){
 			console.log(err);
+			//res.send('query:'+rect+'error:'+err);
 			res.send(listings);
 		});
 	}
