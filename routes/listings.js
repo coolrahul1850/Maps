@@ -6,18 +6,22 @@ exports.list = function(req, res){
   res.send("respond with a resource");
 };
 
+var logs=[];
 var listingsf = function(req,res) {
 	var box=[];
 	if(req.query.curr && (box=req.query.curr.split(',',4)).length==4) {
 		var rect=[[parseFloat(box[1]), parseFloat(box[0])],[parseFloat(box[3]),parseFloat(box[2])]];
-		Listing.find({l:{$geoWithin:{$box:rect}}},function(err,listings){
-		//Listing.find(function(err,listings){
-			console.log(err);
-			//res.send('query:'+rect+'error:'+err);
+		Listing.find({l:{$geoWithin:{$box:rect}}},function(err,listings){ 
+			logs.push(('rect:'+rect)+ ' ' + (err?err:'read '+listings.length));
+			console.log(err?err:'read '+listings.length);
 			res.send(listings);
 		});
 	}
 	else res.send(400,'must limit');
+};
+
+exports.logs=function(req,res) {
+	res.send(logs);
 };
 
 exports.listings = listingsf;

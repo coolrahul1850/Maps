@@ -60,5 +60,6 @@ app.get('/listings/delete', listings.deleteAllListings);
 app.post('/listings/upload', listings.uploadListings);
 app.get('/listings/all', listings.getAll);
 app.get('/listings/poly', listings.polylistings);
+app.get('/listings/logs', listings.logs);
 
 app.listen(process.env.VCAP_APP_PORT || 3000);
