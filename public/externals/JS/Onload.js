@@ -11,9 +11,8 @@ var field = new Array();
 function getListings() {
 	if(previousZoom >= map.getZoom()) {
 		console.log(map.getBounds().toString());
-		$.getJSON("http://findall.aws.af.cm/listings/all?curr="+map.getBounds().toUrlValue()+"&prev="+previousBoundsStr+"&zoom="+map.getZoom(),function(result){
+		$.getJSON("listings/poly?curr="+map.getBounds().toUrlValue()+"&prev="+previousBoundsStr+"&zoom="+map.getZoom(),function(result){
 			previousZoom = map.getZoom();
-
 			$.each(result,function(i,temp)
 		{
 			field[i] = temp;
